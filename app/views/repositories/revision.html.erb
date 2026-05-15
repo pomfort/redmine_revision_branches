@@ -1,6 +1,6 @@
 <%
-   original_partial = File.join(Rails.root, 'app' ,'views', 'repositories', 'revision.html.erb')
-   html = capture { render file: original_partial }
+   original_partial = File.join(Rails.root, 'app', 'views', 'repositories', 'revision.html.erb')
+   html = capture { render inline: File.read(original_partial), type: :erb }
 %>
 
 <% if !!plugin_redmine_revision_branches('display_under_single_revision') && @changeset.scmid.present?
@@ -14,4 +14,4 @@
   end
 %>
 
-<%= html %>
+<%= html.html_safe %>

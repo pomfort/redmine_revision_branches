@@ -1,6 +1,10 @@
-require_dependency 'redmine_revision_branches/git_adapter_patch'
-require_dependency 'redmine_revision_branches/mercurial_adapter_patch'
-require_dependency 'redmine_revision_branches/repositories_helper_patch'
+plugin_lib = File.expand_path('lib', __dir__)
+$LOAD_PATH.unshift(plugin_lib) unless $LOAD_PATH.include?(plugin_lib)
+Rails.autoloaders.main.ignore(plugin_lib) if defined?(Rails) && Rails.respond_to?(:autoloaders) && Rails.autoloaders.main
+
+require 'redmine_revision_branches/git_adapter_patch'
+require 'redmine_revision_branches/mercurial_adapter_patch'
+require 'redmine_revision_branches/repositories_helper_patch'
 
 Redmine::Plugin.register :redmine_revision_branches do
   name 'Revision Branches'
